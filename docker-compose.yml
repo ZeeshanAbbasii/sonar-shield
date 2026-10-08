@@ -1,0 +1,69 @@
+name: sonar-shield
+
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+
+  portal-api:
+    build:
+      context: ./apps/portal/backend
+    restart: unless-stopped
+    environment:
+      - PORT=5001
+      - MONGODB_URI=mongodb://mongo:27017/portal-auth
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me-in-prod}
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongo
+
+  denoise-api:
+    build:
+      context: ./apps/audio-denoiser
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+
+  sat-api:
+    build:
+      context: ./apps/satellite-fec
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8002:8002"
+
+  denoise-ui:
+    build:
+      context: ./apps/audio-denoiser/frontend
+    restart: unless-stopped
+    ports:
+      - "3001:80"
+    depends_on:
+      - denoise-api
+
+  sat-ui:
+    build:
+      context: ./apps/satellite-fec/frontend
+    restart: unless-stopped
+    ports:
+      - "3002:80"
+    depends_on:
+      - sat-api
+
+  portal-ui:
+    build:
+      context: ./apps/portal
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - portal-api
+      - denoise-ui
+      - sat-ui
+
+volumes:
+  mongo-data:

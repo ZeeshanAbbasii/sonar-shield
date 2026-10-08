@@ -1,0 +1,7 @@
+# Backend build context (apps/audio-denoiser). Keep backend/, models/ (active), artifacts/.
+frontend/
+models/archive/
+backend/temp_audio/
+**/__pycache__/
+*.pyc
+README.md

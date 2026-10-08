@@ -1,0 +1,7 @@
+# Backend build context (apps/satellite-fec). Keep backend/ and models/ (active only).
+frontend/
+models/archive/
+artifacts/
+**/__pycache__/
+*.pyc
+README.md

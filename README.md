@@ -82,6 +82,20 @@ npm start --prefix apps/portal/backend                 # portal API   :5001 (nee
 
 Open the portal at **http://localhost:3000**.
 
+### With Docker (all services + MongoDB in containers)
+
+```bash
+docker compose up --build      # first run: builds all images
+docker compose up -d           # later runs (detached)
+docker compose down            # stop everything
+```
+
+The stack is two CPU-PyTorch backends (model weights baked into the images),
+three nginx-served frontend builds, the Express portal API, and a MongoDB
+container. Host ports match the local setup (3000/3001/3002/5001/8001/8002),
+so the same URLs work in the browser. Override the auth secret by setting
+`JWT_SECRET` in your environment or a `.env` file next to `docker-compose.yml`.
+
 ## Data & models
 
 Datasets (~20 GB: UrbanSound8K, ESC-50-augmented, denoising_data, clean_train)

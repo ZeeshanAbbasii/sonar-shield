@@ -1,0 +1,6 @@
+# Frontend build context (apps/portal). Backend has its own image.
+backend/
+node_modules/
+build/
+.env
+README.md

@@ -1,0 +1,49 @@
+# ───────────────────────── Dependencies ─────────────────────────
+node_modules/
+
+# ───────────────────────── Python ───────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# ─────────────── Datasets (large; kept locally, never versioned) ──
+/data/
+UrbanSound8K/
+UrbanSound8K.tar
+ESC-50-augmented/
+ESC-50-master/
+denoising_data/
+clean_train.zip
+*.tar
+
+# ──────── Model binaries (kept locally; share via git-lfs or a fetch script) ────
+*.pth
+*.pt
+*.onnx
+*.h5
+*.ckpt
+
+# ───────────────────────── Build output / caches ────────────────
+dist/
+build/
+.parcel-cache/
+.cache/
+.ipynb_checkpoints/
+
+# ───────────────────────── Runtime scratch ──────────────────────
+apps/denoise/backend/temp_audio/*
+!apps/denoise/backend/temp_audio/.gitkeep
+
+# ───────────────────────── Secrets / environment ────────────────
+.env
+.env.*
+!.env.example
+
+# ───────────────────────── OS / editor junk ─────────────────────
+.DS_Store
+*.swp
+.idea/
+.vscode/

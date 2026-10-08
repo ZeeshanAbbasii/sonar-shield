@@ -1,0 +1,4 @@
+Model,PESQ,STOI,SNR (dB)
+U-Net (Traffic),3.073,0.957,23.03
+Autoencoder (Machinery),2.695,0.927,17.25
+WaveNet (Crowd),2.864,0.95,22.54

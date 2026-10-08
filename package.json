@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start": "concurrently \"npm start --prefix denoise-proj/frontend\" \"npm start --prefix sat-proj/saterror-ai\" \"npm start --prefix portal\" \"python3 denoise-proj/backend/main.py\" \"python3 sat-proj/backend/main.py\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}

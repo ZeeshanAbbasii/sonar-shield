@@ -30,7 +30,10 @@ def build_model(num_classes):
     return m
 
 # ── Load classifier ──
-BASE = '/Users/macbookpro/Desktop/final-attempt'
+# Model lives in apps/denoise/models/ (this file is apps/denoise/backend/tests/).
+BASE = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    'models')
 clf_model  = build_model(CONFIG['num_classes']).to(device)
 clf_model.load_state_dict(torch.load(f'{BASE}/best_classifier.pth', map_location=device))
 clf_model.eval()
@@ -73,6 +76,8 @@ def classify_audio(audio_path):
     return pred_class, confidence, top5
 
 # ── Test files ──
+# NOTE: these are local sample clips used during development; point them at your
+# own mixed-noise .wav files to run the sanity check.
 test_files = [
     '/Users/macbookpro/Downloads/hehe/air_conditioner_mixed.wav',
     '/Users/macbookpro/Downloads/hehe/car_horn_mixed.wav',

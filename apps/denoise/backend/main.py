@@ -7,9 +7,13 @@ from models import (build_classifier, UNetDenoiser,
                     AutoencoderDenoiser, WaveNetStyleDenoiser)
 from pipeline import classify_noise, denoise_audio
 
-MODEL_DIR   = '/Users/macbookpro/Desktop/final-king/denoise-proj'
-FIGURES_DIR = os.path.join(MODEL_DIR, 'paper_figures')
-TEMP_DIR    = os.path.join(os.path.dirname(__file__), 'temp_audio')
+# Paths are resolved relative to this file so the app is location-independent.
+# Layout:  apps/denoise/{backend/main.py, models/, artifacts/}
+APP_DIR       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_DIR     = os.path.join(APP_DIR, 'models')
+ARTIFACTS_DIR = os.path.join(APP_DIR, 'artifacts')
+FIGURES_DIR   = ARTIFACTS_DIR
+TEMP_DIR      = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'temp_audio')
 os.makedirs(TEMP_DIR, exist_ok=True)
 
 SUPPORTED = {'.wav', '.mp3', '.m4a', '.flac', '.ogg', '.aiff', '.aac'}
@@ -134,7 +138,7 @@ async def serve_audio(filename: str):
 
 @app.get("/results")
 async def get_results():
-    csv = os.path.join(MODEL_DIR, 'denoising_results.csv')
+    csv = os.path.join(ARTIFACTS_DIR, 'denoising_results.csv')
     if not os.path.exists(csv):
         raise HTTPException(404, "Results not found.")
     return JSONResponse(pd.read_csv(csv).to_dict(orient='records'))

@@ -35,9 +35,12 @@ n_states         = 2**M     # 64 trellis states
 R                = 0.5      # code rate
 generators       = [0o171, 0o133]  # NASA/CCSDS
 
+# Resolved relative to this file so the app is location-independent.
+# Layout:  apps/sat/{backend/main.py, models/}
+MODEL_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'models')
 MODEL_PATHS = [
-    '../lstm_decoder_v2_best.pt',
-    '../lstm_decoder_v2.pt',
+    os.path.join(MODEL_DIR, 'lstm_decoder_v2_best.pt'),
 ]
 
 # ════════════════════════════════════════

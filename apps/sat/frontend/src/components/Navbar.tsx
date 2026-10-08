@@ -74,7 +74,7 @@ const Navbar = () => {
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <a
-          href="http://localhost:3003/dashboard"
+          href="http://localhost:3000/dashboard"
           style={{
             display: 'flex',
             alignItems: 'center',

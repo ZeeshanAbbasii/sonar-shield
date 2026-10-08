@@ -30,7 +30,7 @@ def build_model(num_classes):
     return m
 
 # ── Load classifier ──
-# Model lives in apps/denoise/models/ (this file is apps/denoise/backend/tests/).
+# Model lives in apps/audio-denoiser/models/ (this file is apps/audio-denoiser/backend/tests/).
 BASE = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'models')

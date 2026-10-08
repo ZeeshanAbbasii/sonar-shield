@@ -14,7 +14,7 @@ models/       active weights: lstm_decoder_v2_best.pt
 artifacts/    benchmark_results.json, benchmark charts, pics/
 ```
 
-Model paths resolve relative to `backend/main.py` (`…/apps/sat/models`), so the
+Model paths resolve relative to `backend/main.py` (`…/apps/satellite-fec/models`), so the
 app runs from anywhere.
 
 ## Run

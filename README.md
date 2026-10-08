@@ -1,26 +1,26 @@
-# Final King — ML Web Apps Monorepo
+# SONAR Shield — ML Web Apps Monorepo
 
 A monorepo bundling three independent full-stack machine-learning applications
 behind a single portal, launched together by one orchestrator script.
 
 | App | What it does | Frontend | Backend |
 |-----|--------------|----------|---------|
-| **denoise** (SONAR Shield) | Classifies urban noise (ResNet-18) and denoises audio with specialised models (U-Net / Autoencoder / WaveNet) | React + Parcel · `:3001` | FastAPI · `:8001` |
-| **sat** (SatError AI) | AI forward-error-correction for satellite links using a bidirectional-LSTM decoder | React + TypeScript (CRA) · `:3002` | FastAPI · `:8002` |
+| **audio-denoiser** (SONAR Shield) | Classifies urban noise (ResNet-18) and denoises audio with specialised models (U-Net / Autoencoder / WaveNet) | React + Parcel · `:3001` | FastAPI · `:8001` |
+| **satellite-fec** (SatError AI) | AI forward-error-correction for satellite links using a bidirectional-LSTM decoder | React + TypeScript (CRA) · `:3002` | FastAPI · `:8002` |
 | **portal** | Dashboard hub that embeds the two apps; JWT auth | React (CRA) · `:3000` | Express + MongoDB · `:5001` |
 
 ## Repository layout
 
 ```
-final-king/
-├── package.json            # orchestrator — `npm start` runs all 5 services via concurrently
+sonar-shield/
+├── package.json            # orchestrator — `npm start` runs all 6 services via concurrently
 ├── apps/
-│   ├── denoise/
+│   ├── audio-denoiser/
 │   │   ├── backend/        # FastAPI app (main.py, models.py, pipeline.py) + tests/
 │   │   ├── frontend/       # React + Parcel
 │   │   ├── models/         # active .pth weights (+ archive/ for unused)
 │   │   └── artifacts/      # figures, demo audio, results csv
-│   ├── sat/
+│   ├── satellite-fec/
 │   │   ├── backend/        # FastAPI app (main.py)
 │   │   ├── frontend/       # React + TypeScript (CRA)
 │   │   ├── models/         # active .pt weights (+ archive/)
@@ -46,19 +46,19 @@ final-king/
 npm install
 
 # 2. Each app's dependencies
-npm install --prefix apps/denoise/frontend
-npm install --prefix apps/sat/frontend
+npm install --prefix apps/audio-denoiser/frontend
+npm install --prefix apps/satellite-fec/frontend
 npm install --prefix apps/portal
 
 # 3. Python backends (one virtualenv shared by both FastAPI services)
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r apps/denoise/backend/requirements.txt
-pip install -r apps/sat/backend/requirements.txt
+pip install -r apps/audio-denoiser/backend/requirements.txt
+pip install -r apps/satellite-fec/backend/requirements.txt
 
 # 4. Environment files (copy the examples and fill in real values)
 cp apps/portal/backend/.env.example apps/portal/backend/.env
-cp apps/sat/frontend/.env.example  apps/sat/frontend/.env
+cp apps/satellite-fec/frontend/.env.example apps/satellite-fec/frontend/.env
 ```
 
 ## Run
@@ -72,12 +72,12 @@ npm start
 Or a single service:
 
 ```bash
-.venv/bin/python apps/denoise/backend/main.py   # denoise API  :8001
-.venv/bin/python apps/sat/backend/main.py       # sat API      :8002
-npm start --prefix apps/denoise/frontend        # denoise UI   :3001
-npm start --prefix apps/sat/frontend            # sat UI       :3002
-npm start --prefix apps/portal                  # portal UI    :3000
-npm start --prefix apps/portal/backend          # portal API   :5001 (needs MongoDB)
+.venv/bin/python apps/audio-denoiser/backend/main.py   # denoise API  :8001
+.venv/bin/python apps/satellite-fec/backend/main.py    # sat API      :8002
+npm start --prefix apps/audio-denoiser/frontend        # denoise UI   :3001
+npm start --prefix apps/satellite-fec/frontend         # sat UI       :3002
+npm start --prefix apps/portal                         # portal UI    :3000
+npm start --prefix apps/portal/backend                 # portal API   :5001 (needs MongoDB)
 ```
 
 Open the portal at **http://localhost:3000**.

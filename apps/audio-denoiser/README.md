@@ -18,7 +18,7 @@ artifacts/    figures (confusion_matrix, evaluation charts), demo audio,
 ```
 
 Model, figure and results paths resolve relative to `backend/main.py`
-(`APP_DIR = …/apps/denoise`), so the app runs from anywhere.
+(`APP_DIR = …/apps/audio-denoiser`), so the app runs from anywhere.
 
 ## Run
 

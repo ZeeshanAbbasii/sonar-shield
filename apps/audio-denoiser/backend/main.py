@@ -8,7 +8,7 @@ from models import (build_classifier, UNetDenoiser,
 from pipeline import classify_noise, denoise_audio
 
 # Paths are resolved relative to this file so the app is location-independent.
-# Layout:  apps/denoise/{backend/main.py, models/, artifacts/}
+# Layout:  apps/audio-denoiser/{backend/main.py, models/, artifacts/}
 APP_DIR       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_DIR     = os.path.join(APP_DIR, 'models')
 ARTIFACTS_DIR = os.path.join(APP_DIR, 'artifacts')

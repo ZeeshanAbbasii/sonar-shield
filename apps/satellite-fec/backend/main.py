@@ -36,7 +36,7 @@ R                = 0.5      # code rate
 generators       = [0o171, 0o133]  # NASA/CCSDS
 
 # Resolved relative to this file so the app is location-independent.
-# Layout:  apps/sat/{backend/main.py, models/}
+# Layout:  apps/satellite-fec/{backend/main.py, models/}
 MODEL_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'models')
 MODEL_PATHS = [

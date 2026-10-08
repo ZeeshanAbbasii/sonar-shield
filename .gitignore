@@ -34,8 +34,8 @@ build/
 .ipynb_checkpoints/
 
 # ───────────────────────── Runtime scratch ──────────────────────
-apps/denoise/backend/temp_audio/*
-!apps/denoise/backend/temp_audio/.gitkeep
+apps/audio-denoiser/backend/temp_audio/*
+!apps/audio-denoiser/backend/temp_audio/.gitkeep
 
 # ───────────────────────── Secrets / environment ────────────────
 .env

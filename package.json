@@ -3,7 +3,7 @@
   "private": true,
   "description": "Monorepo for three ML web apps: SONAR Shield audio denoising, satellite FEC error-correction, and the portal dashboard that ties them together.",
   "scripts": {
-    "start": "concurrently \"npm start --prefix apps/denoise/frontend\" \"npm start --prefix apps/sat/frontend\" \"npm start --prefix apps/portal\" \"python3 apps/denoise/backend/main.py\" \"python3 apps/sat/backend/main.py\""
+    "start": "concurrently -k -n denoise-api,sat-api,denoise-ui,sat-ui,portal-ui,portal-api \".venv/bin/python apps/denoise/backend/main.py\" \".venv/bin/python apps/sat/backend/main.py\" \"npm start --prefix apps/denoise/frontend\" \"npm start --prefix apps/sat/frontend\" \"npm start --prefix apps/portal\" \"npm start --prefix apps/portal/backend\""
   },
   "devDependencies": {
     "concurrently": "^8.0.0"

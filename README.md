@@ -50,7 +50,9 @@ npm install --prefix apps/denoise/frontend
 npm install --prefix apps/sat/frontend
 npm install --prefix apps/portal
 
-# 3. Python backends
+# 3. Python backends (one virtualenv shared by both FastAPI services)
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r apps/denoise/backend/requirements.txt
 pip install -r apps/sat/backend/requirements.txt
 
@@ -61,7 +63,7 @@ cp apps/sat/frontend/.env.example  apps/sat/frontend/.env
 
 ## Run
 
-Everything at once (3 frontends + 2 backends in parallel):
+Everything at once (3 frontends + 3 backends in parallel, using the venv Python):
 
 ```bash
 npm start
@@ -70,11 +72,12 @@ npm start
 Or a single service:
 
 ```bash
-python3 apps/denoise/backend/main.py          # denoise API  :8001
-python3 apps/sat/backend/main.py              # sat API      :8002
-npm start --prefix apps/denoise/frontend      # denoise UI   :3001
-npm start --prefix apps/sat/frontend          # sat UI       :3002
-npm start --prefix apps/portal                # portal       :3000
+.venv/bin/python apps/denoise/backend/main.py   # denoise API  :8001
+.venv/bin/python apps/sat/backend/main.py       # sat API      :8002
+npm start --prefix apps/denoise/frontend        # denoise UI   :3001
+npm start --prefix apps/sat/frontend            # sat UI       :3002
+npm start --prefix apps/portal                  # portal UI    :3000
+npm start --prefix apps/portal/backend          # portal API   :5001 (needs MongoDB)
 ```
 
 Open the portal at **http://localhost:3000**.
